@@ -1,6 +1,7 @@
 BOOKINGAPP_FRONTEND
 
 this app was made by Santiago Toro.
+the app works with React_app.
 
 instalation guide:
 
