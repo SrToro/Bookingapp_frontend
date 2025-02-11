@@ -5,6 +5,7 @@ import AuthPage from './pages/Auth';
 import BookingsPage from './pages/Bookings';
 import EventsPage from './pages/Events';
 import UserPage from './pages/User';
+import MainNavigation from './components/Navigation/MainNavigation';
 
 import './App.css';
 
@@ -12,13 +13,16 @@ import './App.css';
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/auth" />} />
-        <Route path="/auth" element={<AuthPage/>} />
-        <Route path='/user' element={<UserPage/>} />
-        <Route path='/events' element={<EventsPage/>} />
-        <Route path='/bookings' element={<BookingsPage/>} />
-      </Routes>
+      <MainNavigation />
+      <main className='main-content'>
+        <Routes>
+          <Route path="/" element={<Navigate to="/auth" />} />
+          <Route path="/auth" element={<AuthPage />} />
+          <Route path='/user' element={<UserPage />} />
+          <Route path='/events' element={<EventsPage />} />
+          <Route path='/bookings' element={<BookingsPage />} />
+        </Routes>
+      </main>
     </BrowserRouter>
   );
 }
