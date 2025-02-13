@@ -28,35 +28,29 @@ class AuthPage extends Component {
         //make a request body on a const with the values from the form that created as a cons before
 
         const requestBody = {
-            query: `
-                mutation{
-                    createUser(userInput: {email: "${email}", password: "${password}"}){
-                        _id 
-                        email
-                    }
-                }
-            `
+            "query": `mutation{createUser(userInput: {email: "${email}", password: "${password}"}){_id email}}`
         };
-
+        console.log(JSON.stringify(requestBody))
 
         //to send http request to the backend and as a second argument the json with the post
         fetch('http://localhost:8000/graphql', {
             method: 'POST',
             body: JSON.stringify(requestBody),
-            Headers: {
+            headers: {
+                'Accept':'application/json',
                 'Content-Type': 'application/json'
             }
         })
-        // .then(res =>{
-        //     if(res.status !== 200 && res.status !== 201){
-        //         throw new Error('failed')
-        //     }
-        //     return requestBody.json();
-        // }).then(resData =>{
-        //     console.log(resData)
-        // }).catch(err =>{
-        //     console.log(err);
-        // })
+        .then(res =>{
+            if(res.status !== 200 && res.status !== 201){
+                throw new Error('failed')
+            }
+            return requestBody.json();
+        }).then(resData =>{
+            console.log(resData)
+        }).catch(err =>{
+            console.log(err);
+        })
         
     };
 
@@ -64,6 +58,7 @@ class AuthPage extends Component {
         return (
             // conect the submithandler with the form and in each data, take the values. 
             // the values are sended to the development server (at the page)
+
             <form className="auth-form" onSubmit={this.submitHandler}>
                 <div className="form-control">
                     <label htmlFor="email">E-mail</label>
