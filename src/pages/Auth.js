@@ -7,7 +7,7 @@ class AuthPage extends Component {
 
     //router to signup page
     state = {
-        isLogin : true
+        isLogin: true
     }
 
 
@@ -18,9 +18,9 @@ class AuthPage extends Component {
         this.passwordEl = React.createRef();
     }
 
-    switchModeHandler = () =>{
-        this.setState(prevState =>{
-            return {isLogin: !prevState.isLogin}
+    switchModeHandler = () => {
+        this.setState(prevState => {
+            return { isLogin: !prevState.isLogin }
         })
     }
 
@@ -37,33 +37,55 @@ class AuthPage extends Component {
             return;
         }
 
-        //make a request body on a const with the values from the form that created as a cons before
-
-        const requestBody = {
-            "query": `mutation{createUser(userInput: {email: "${email}", password: "${password}"}){_id email}}`
+        
+        //make a request body on a let with the values from the form that created as a cons but if the state isLogin is true
+        let requestBody = {
+            query: 
+            `query{
+                login(email: "${email}", password: "${password}"){
+                    userId
+                    token
+                    tokenExpiration
+                    }
+                }`
         };
-        console.log(JSON.stringify(requestBody))
+
+        //if the login state is false, make a create user
+        if (!this.state.isLogin) {
+
+            requestBody = {
+                query: `mutation{
+                            createUser(userInput: {
+                                email: "${email}", 
+                                password: "${password}"
+                            }){ _id 
+                                email}
+                        }`
+            };
+
+        }
+
 
         //to send http request to the backend and as a second argument the json with the post
         fetch('http://localhost:8000/graphql', {
             method: 'POST',
             body: JSON.stringify(requestBody),
             headers: {
-                'Accept':'application/json',
+                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
         })
-        .then(res =>{
-            if(res.status !== 200 && res.status !== 201){
-                throw new Error('failed')
-            }
-            return requestBody.json();
-        }).then(resData =>{
-            console.log(resData)
-        }).catch(err =>{
-            console.log(err);
-        })
-        
+            .then(res => {
+                if (res.status !== 200 && res.status !== 201) {
+                    throw new Error('failed')
+                }
+                return requestBody.json();
+            }).then(resData => {
+                console.log(resData)
+            }).catch(err => {
+                console.log(err);
+            })
+
     };
 
     render() {
@@ -82,7 +104,7 @@ class AuthPage extends Component {
                 </div>
                 <div className="form-actions">
                     <button type="submit">Login</button>
-                    <button type="button" onClick={this.switchModeHandler}>{this.state.isLogin ? 'Signup': 'Login'}</button>
+                    <button type="button" onClick={this.switchModeHandler}>switch to {this.state.isLogin ? 'Signup' : 'Login'}</button>
                 </div>
             </form>
 
