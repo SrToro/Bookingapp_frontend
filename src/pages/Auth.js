@@ -5,11 +5,23 @@ import './Auth.css';
 
 class AuthPage extends Component {
 
+    //router to signup page
+    state = {
+        isLogin : true
+    }
+
+
     //constructor of the data from the form
     constructor(props) {
         super(props);
         this.emailEl = React.createRef();
         this.passwordEl = React.createRef();
+    }
+
+    switchModeHandler = () =>{
+        this.setState(prevState =>{
+            return {isLogin: !prevState.isLogin}
+        })
     }
 
     //handler that take the data from the form and make a backend request
@@ -70,7 +82,7 @@ class AuthPage extends Component {
                 </div>
                 <div className="form-actions">
                     <button type="submit">Login</button>
-                    <button type="button">Sign Up</button>
+                    <button type="button" onClick={this.switchModeHandler}>{this.state.isLogin ? 'Signup': 'Login'}</button>
                 </div>
             </form>
 
