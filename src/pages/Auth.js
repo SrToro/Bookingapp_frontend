@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import './Auth.css';
+import AuthContext from "../context/auth-context";
 
 
 class AuthPage extends Component {
@@ -10,6 +11,7 @@ class AuthPage extends Component {
         isLogin: true
     }
 
+    static contextType = AuthContext;
 
     //constructor of the data from the form
     constructor(props) {
@@ -37,11 +39,11 @@ class AuthPage extends Component {
             return;
         }
 
-        
+
         //make a request body on a let with the values from the form that created as a cons but if the state isLogin is true
         let requestBody = {
-            query: 
-            `query{
+            query:
+                `query{
                 login(email: "${email}", password: "${password}"){
                     userId
                     token
@@ -71,7 +73,6 @@ class AuthPage extends Component {
             method: 'POST',
             body: JSON.stringify(requestBody),
             headers: {
-                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
         })
@@ -79,9 +80,15 @@ class AuthPage extends Component {
                 if (res.status !== 200 && res.status !== 201) {
                     throw new Error('failed')
                 }
-                return requestBody.json();
+                return res.json();
             }).then(resData => {
-                console.log(resData)
+                if (resData.data.login.token) {
+                    this.context.login(
+                        resData.data.login.token,
+                        resData.data.login.userId,
+                        resData.data.login.tokenExpiration
+                    )
+                }
             }).catch(err => {
                 console.log(err);
             })
