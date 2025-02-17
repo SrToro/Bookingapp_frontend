@@ -1,13 +1,18 @@
-.main-navigation{
+.main-navigation {
     position: fixed;
     left: 0;
     top: 0;
     width: 100%;
     height: 3.5rem;
-    background: skyblue;
     padding: 0 1rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    background: #6692F1;
+    background: -moz-linear-gradient(top, #6692F1 0%, #6692F1 65%, #FFFFFF 100%);
+    background: -webkit-linear-gradient(top, #6692F1 0%, #6692F1 65%, #FFFFFF 100%);
+    background: linear-gradient(to bottom, #6692F1 0%, #6692F1 65%, #FFFFFF 100%);
 }
 
 .main-navigation-logo {
@@ -15,11 +20,14 @@
     font-size: 1rem;
     text-align: center;
 }
-.main-navigation-logo h1{
-    margin: 0;
-    font-size: 1.5rem ;
-}
 
+.main-navigation-logo h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    background-color: rgb(137, 174, 255);
+    box-shadow: 5px 5px 5px rgb(137, 174, 255);
+    border-radius: 10px;
+}
 
 .main-navigation-item {
     margin-left: 1.5rem;
@@ -30,6 +38,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    align-items: center;
 }
 
 .main-navigation-item li {
@@ -37,13 +46,29 @@
 
 }
 
-.main-navigation-item a {
+.main-navigation-item a,
+.main-navigation-item button {
     text-decoration: none;
-    color: black
+    color: rgb(49, 49, 49);
+    padding: 0.25rem 0.5rem;
+    border: none;
+    font: inherit;
+    background: transparent;
+    cursor: pointer;
+    vertical-align: middle;
+    margin: 0;
+
 }
 
 .main-navigation-item a:hover,
 .main-navigation-item a:active,
-.main-navigation-item a.active {
-    color: gold;
+.main-navigation-item a.active,
+.main-navigation-item button:hover,
+.main-navigation-item button:active {
+    border-radius: 5px;
+    color: black;
+    background: -moz-linear-gradient(top, #ffff 0%, #ffff 65%, #6692F1 100%);
+    background: -webkit-linear-gradient(top, #ffff 0%, #ffff 65%, #6692F1 100%);
+    background: linear-gradient(to bottom, #ffff 0%, #ffff 50%, #6692F1 100%);
+    
 }

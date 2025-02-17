@@ -52,6 +52,8 @@ function App() {
           <main className='main-content'>
             <Routes>
               {!state.token && <Route path="/" element={<Navigate to="/auth" />} />}
+              {!state.token && <Route path="/bookings" element={<Navigate to="/auth" />} />}
+              {!state.token && <Route path="/user" element={<Navigate to="/auth" />} />}
               {state.token && <Route path="/" element={<Navigate to="/events" />} />}
               {!state.token && <Route path="/auth" element={<AuthPage />} />}
               {state.token && <Route path="/auth" element={<Navigate to="/events" />} />}

@@ -33,6 +33,9 @@ const mainNavigation = props => (
                             {context.token && <li>
                                 <NavLink to="/user">Profile</NavLink>
                             </li>}
+                            {context.token && <li>
+                                <button onClick={context.logout}>Log out</button>
+                            </li>}
                         </ul>
                     </div>
                 </header>
