@@ -50,14 +50,13 @@
 .main-navigation-item button {
     text-decoration: none;
     color: rgb(49, 49, 49);
-    padding: 0.25rem 0.5rem;
+    padding: 0.5rem 0.5rem;
     border: none;
     font: inherit;
     background: transparent;
     cursor: pointer;
     vertical-align: middle;
     margin: 0;
-
 }
 
 .main-navigation-item a:hover,
