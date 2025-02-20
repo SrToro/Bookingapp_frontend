@@ -10,5 +10,5 @@ instalation guide:
 2- install the dependences 
     npm install node-modules
 
-se planea realizar un funcionamiento en servidor con nginx para trabajar en un sistema man
+Looking for a nginx or Apache server tu run online 
 
