@@ -11,5 +11,3 @@ instalation guide:
     npm install node-modules
 
 Looking for a nginx or Apache server tu run online 
-
-on vacation 'till 26 02
