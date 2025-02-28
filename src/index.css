@@ -23,6 +23,7 @@ body {
 .btn {
     background: rgb(162, 232, 245);
     font: inherit;
+    margin-bottom: 1rem;
     border: 1px solid rgb(0, 91, 148);
     border-radius: 5px;
     padding: 0.25rem 1rem;
