@@ -26,7 +26,7 @@
     font-size: 1.5rem;
     background-color: rgb(137, 174, 255);
     box-shadow: 5px 5px 5px rgb(137, 174, 255);
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 .main-navigation-item {
@@ -64,7 +64,7 @@
 .main-navigation-item a.active,
 .main-navigation-item button:hover,
 .main-navigation-item button:active {
-    border-radius: 5px;
+    border-radius: 3px;
     color: black;
     background: -moz-linear-gradient(top, #ffff 0%, #ffff 65%, #6692F1 100%);
     background: -webkit-linear-gradient(top, #ffff 0%, #ffff 65%, #6692F1 100%);
