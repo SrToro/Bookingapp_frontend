@@ -2,6 +2,7 @@ import React, { Component, useState } from "react";
 
 import Modal from '../components/Modal/Modal'
 import Backdrop from "../components/Backdrop/Backdrop";
+import AuthContext from '../context/auth-context';
 
 import './Events.css';
 
@@ -10,6 +11,8 @@ class EventsPage extends Component {
     state={
         creating: false
     }
+
+    static contextType = AuthContext;
 
     constructor(props){
         super(props);
@@ -35,7 +38,52 @@ class EventsPage extends Component {
         }
         const event = {title, price, description, date}
         console.log(event)
-    }
+
+            //make a request body on a let with the values from the form that created as a cons but if the state isLogin is true
+
+        const requestBody = {
+            query: `mutation{
+                        createEvent(eventInput: {
+                            title: "${title}", 
+                            description: "${description}", 
+                            price: ${price}, 
+                            date: "${date}"
+                        }){ _id 
+                            title
+                            description
+                            price
+                            date}
+                    }`
+        };
+
+        const token = this.context.token;
+
+        //to send http request to the backend and as a second argument the json with the post
+        fetch('http://localhost:8000/graphql', {
+            method: 'POST',
+            body: JSON.stringify(requestBody),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then(res => {
+                if (res.status !== 200 && res.status !== 201) {
+                    throw new Error('failed')
+                }
+                return res.json();
+            }).then(resData => {
+                
+                console.log(resData)
+
+            }).catch(err => {
+                console.log(err);
+            })
+
+    };
+
+
+
 
     onCancelHandler = () =>{
         this.setState({creating:false})
