@@ -33,7 +33,10 @@ class EventsPage extends Component {
         const description = this.descriptionElRef.current.value;
         const date = this.dateElRef.current.value;
 
-        if (title.trim().length === 0 || price.trim().length === 0 || description.trim().length === 0 || date.trim().length === 0){
+        if (title.trim().length === 0 || 
+            price<=0 || 
+            description.trim().length === 0 || 
+            date.trim().length === 0){
             return;
         }
         const event = {title, price, description, date}
