@@ -96,7 +96,8 @@ class EventsPage extends Component {
         return (
             <React.Fragment>
                 { this.state.creating  &&<Backdrop/>}
-                { this.state.creating && <Modal title="Add Event" canCancel canConfirm onConfirm={this.onConfirmHandler} onCancel={this.onCancelHandler}>
+                { this.state.creating && 
+                (<Modal title="Add Event" canCancel canConfirm onConfirm={this.onConfirmHandler} onCancel={this.onCancelHandler}>
                     <form>
                         <div className="form-control">
                             <label htmlFor="title">Title</label>
@@ -115,11 +116,16 @@ class EventsPage extends Component {
                             <input type="date" id="date" ref={this.dateElRef}></input>  
                         </div>
                     </form>
-                </Modal>}
-                <div className="events-control">
+                </Modal>)}
+                {this.context.token && 
+                (<div className="events-control">
                     <p>Share your own Events!</p>
                     <button className="btn" onClick={this.startCreateEventHandler}>Create Event</button>
-                </div>
+                </div>)
+                }
+                <ul className="events_list">
+                    <li className="events_list_item"></li>
+                </ul>
             </React.Fragment>
         )
     }
