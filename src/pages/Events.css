@@ -7,7 +7,6 @@
     max-width: 80%;
 }
 .events_list{
-    margin-top: 2rem;
     width: 40rem;
     max-width: 90%;
     margin: 2rem auto;
@@ -17,4 +16,6 @@
 
 .events_list_item{
     margin: 1rem 0;
+    padding: 1rem;
+    border: 1px solid #7b077d;
 }
