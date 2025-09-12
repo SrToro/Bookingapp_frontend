@@ -1,7 +1,9 @@
 import React from "react";
 
+import "./EventItem.css";
+
 const eventItem = props => (
-    <li key={props.eventId} className="events_list_item">
+    <li key={props.eventId} className="event_list_item">
           {props.title}
         </li>
 )
