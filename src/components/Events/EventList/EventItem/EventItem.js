@@ -10,6 +10,7 @@ const eventItem = (props) => (
     </div>
     <div>
         <button className="btn">View Details</button>
+        <p>you are the owner of this event</p>
     </div>
   </li>
 );
