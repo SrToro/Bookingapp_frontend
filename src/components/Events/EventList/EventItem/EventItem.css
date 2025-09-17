@@ -4,6 +4,7 @@
     border: 1px solid #7b077d;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .event_list_item h1{
@@ -16,4 +17,8 @@
     margin: 0;
     font-size: 1rem;
     color: #248740;
+}
+
+.event_list_item p{
+    margin: 0;
 }

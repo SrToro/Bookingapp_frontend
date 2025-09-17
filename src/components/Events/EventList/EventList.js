@@ -7,7 +7,7 @@ import EventItem from "../EventList/EventItem/EventItem.js";
 const eventList = props => {
 
     const events = props.events.map(event => {
-        return <EventItem key={event._id} eventId={event._id} title={event.title}/>
+        return <EventItem key={event._id} eventId={event._id} title={event.title} userId={props.authUserId}/>
       });
 
     return (<ul className="event_list">{events}</ul>)
