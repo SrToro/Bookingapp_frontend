@@ -84,7 +84,20 @@ class EventsPage extends Component {
         return res.json();
       })
       .then(resData => {
-        this.fetchEventsHandler();
+        this.setState(prevState => {
+          const updatedEvents = [...prevState.events];
+          updatedEvents.push({
+            _id: resData.data.createEvent._id,
+            title: resData.data.createEvent.title,
+            description: resData.data.createEvent.description,
+            date: resData.data.createEvent.date,
+            price: resData.data.createEvent.price,
+            creator: {
+              _id: this.context.userId,
+            },
+          });
+          return { events: updatedEvents };
+        })
       })
       .catch(err => {
         console.log(err);
@@ -102,7 +115,12 @@ class EventsPage extends Component {
                 title
                 description
                 price
-                date}
+                date
+              creator{
+                _id
+                email
+              }
+            }
         }`,
     };
 
@@ -179,7 +197,7 @@ class EventsPage extends Component {
         <EventList 
           events={this.state.events} 
           authUserId={this.context.userId}
-          creatorId={event.creator._id}
+           
         />
         
       </React.Fragment>
