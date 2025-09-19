@@ -3,6 +3,7 @@ import React, { Component, useState } from "react";
 import Modal from "../components/Modal/Modal";
 import Backdrop from "../components/Backdrop/Backdrop";
 import AuthContext from "../context/auth-context";
+import Spinner from "../components/Spinner/Spinner.js"
 
 import EventList from "../components/Events/EventList/EventList.js";
 import "./Events.css";
@@ -197,13 +198,12 @@ class EventsPage extends Component {
             </button>
           </div>
         )}
-        {this.state.isLoading ? <p>Loading...</p> : <EventList 
+        {this.state.isLoading ? <Spinner/>: <EventList 
           events={this.state.events} 
           authUserId={this.context.userId}
         />
         }
-        
-        
+              
       </React.Fragment>
     );
   }
