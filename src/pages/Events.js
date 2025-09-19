@@ -13,6 +13,7 @@ class EventsPage extends Component {
     creating: false,
     events: [],
     isLoading: false,
+    selectedEvent: null,
   };
 
   static contextType = AuthContext;
@@ -107,8 +108,12 @@ class EventsPage extends Component {
   };
 
   onCancelHandler = () => {
-    this.setState({ creating: false });
+    this.setState({ creating: false, selectedEvent:null });
   };
+
+  bookEventHandler =() =>{
+
+  }
 
   fetchEventsHandler = () => {
     this.setState({ isLoading: true });
@@ -153,6 +158,13 @@ class EventsPage extends Component {
       });
   };
 
+  showDetailHandler = eventId => {
+    this.setState(prevState=>{
+      const selectedEvent = prevState.events.find(e => e._id === eventId)
+      return {selectedEvent : selectedEvent}
+    })
+  }
+
   render() {
 
     return (
@@ -190,6 +202,19 @@ class EventsPage extends Component {
             </form>
           </Modal>
         )}
+        {this.selectedEvent && (
+          <Modal
+            title={this.state.selectedEvent.title }
+            canCancel
+            canConfirm
+            onConfirm={this.bookEventHandler}
+            onCancel={this.onCancelHandler}
+          >
+            <h1>{this.selectedEvent.title}</h1>
+            <h2>price: ${this.state.selectedEvent.price} - date: {new Date(this.state.selectedEvent.date).toLocaleDateString()}</h2>
+            <p>{this.state.selectedEvent.description}</p>
+          </Modal>)}
+
         {this.context.token && (
           <div className="events-control">
             <p>Share your own Events!</p>
@@ -201,6 +226,7 @@ class EventsPage extends Component {
         {this.state.isLoading ? <Spinner/>: <EventList 
           events={this.state.events} 
           authUserId={this.context.userId}
+          onViewDetail={this.showDetailHandler}
         />
         }
               
