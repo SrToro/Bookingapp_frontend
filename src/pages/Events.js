@@ -108,12 +108,10 @@ class EventsPage extends Component {
   };
 
   onCancelHandler = () => {
-    this.setState({ creating: false, selectedEvent:null });
+    this.setState({ creating:false, selectedEvent:null });
   };
 
-  bookEventHandler =() =>{
-
-  }
+  bookEventHandler =() =>{ }
 
   fetchEventsHandler = () => {
     this.setState({ isLoading: true });
@@ -159,9 +157,9 @@ class EventsPage extends Component {
   };
 
   showDetailHandler = eventId => {
-    this.setState(prevState=>{
+    this.setState(prevState => {
       const selectedEvent = prevState.events.find(e => e._id === eventId)
-      return {selectedEvent : selectedEvent}
+      return {selectedEvent: selectedEvent}
     })
   }
 
@@ -169,7 +167,7 @@ class EventsPage extends Component {
 
     return (
       <React.Fragment>
-        {this.state.creating && <Backdrop />}
+        {(this.state.creating || this.state.selectedEvent) && <Backdrop />}
         {this.state.creating && (
           <Modal
             title="Add Event"
@@ -202,18 +200,19 @@ class EventsPage extends Component {
             </form>
           </Modal>
         )}
-        {this.selectedEvent && (
+        {this.state.selectedEvent && (
           <Modal
-            title={this.state.selectedEvent.title }
+            title={this.state.selectedEvent.title}
             canCancel
             canConfirm
             onConfirm={this.bookEventHandler}
             onCancel={this.onCancelHandler}
           >
-            <h1>{this.selectedEvent.title}</h1>
+            <h1>{this.state.selectedEvent.title}</h1>
             <h2>price: ${this.state.selectedEvent.price} - date: {new Date(this.state.selectedEvent.date).toLocaleDateString()}</h2>
             <p>{this.state.selectedEvent.description}</p>
-          </Modal>)}
+          </Modal>)
+        }
 
         {this.context.token && (
           <div className="events-control">
