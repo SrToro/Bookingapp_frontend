@@ -175,6 +175,7 @@ class EventsPage extends Component {
             canConfirm
             onConfirm={this.onConfirmHandler}
             onCancel={this.onCancelHandler}
+            confirmText="Confirm"
           >
             <form>
               <div className="form-control">
@@ -207,7 +208,8 @@ class EventsPage extends Component {
             canCancel
             canConfirm
             onConfirm={this.bookEventHandler}
-            onCancel={this.onCancelHandler}>
+            onCancel={this.onCancelHandler}
+            confirmText="Book!">
               <h1>{this.state.selectedEvent.title}</h1>
               <h3>price: ${this.state.selectedEvent.price} - date: {new Date(this.state.selectedEvent.date).toLocaleDateString()}</h3>
               <p>{this.state.selectedEvent.description}</p>
