@@ -201,17 +201,18 @@ class EventsPage extends Component {
           </Modal>
         )}
         {this.state.selectedEvent && (
-          <Modal
+          <div className="modal-details">
+            <Modal
             title={this.state.selectedEvent.title}
             canCancel
             canConfirm
             onConfirm={this.bookEventHandler}
-            onCancel={this.onCancelHandler}
-          >
-            <h1>{this.state.selectedEvent.title}</h1>
-            <h2>price: ${this.state.selectedEvent.price} - date: {new Date(this.state.selectedEvent.date).toLocaleDateString()}</h2>
-            <p>{this.state.selectedEvent.description}</p>
-          </Modal>)
+            onCancel={this.onCancelHandler}>
+              <h1>{this.state.selectedEvent.title}</h1>
+              <h3>price: ${this.state.selectedEvent.price} - date: {new Date(this.state.selectedEvent.date).toLocaleDateString()}</h3>
+              <p>{this.state.selectedEvent.description}</p>
+            </Modal>
+          </div> )
         }
 
         {this.context.token && (
