@@ -111,7 +111,46 @@ class EventsPage extends Component {
     this.setState({ creating:false, selectedEvent:null });
   };
 
-  bookEventHandler =() =>{ }
+  bookEventHandler =() =>{
+    if (!this.context.token){
+      this.setState({selectedEvent:null})
+      return
+    }
+    const requestBody = {
+      query: `mutation{
+            bookEvent(eventId: "${this.state.selectedEvent._id}")
+              { _id 
+                createdAt
+                updatedAt
+              }
+          }`,
+    };
+
+    const token = this.context.token;
+
+    //to send http request to the backend and as a second argument the json with the post
+    fetch("http://localhost:8000/graphql", {
+      method: "POST",
+      body: JSON.stringify(requestBody),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + this.context.token,
+      },
+    })
+      .then((res) => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error("failed");
+        }
+        return res.json();
+      })
+      .then((resData) => {
+        console.log(resData);
+        this.setState({selectedEvent:null})
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   fetchEventsHandler = () => {
     this.setState({ isLoading: true });
@@ -209,7 +248,7 @@ class EventsPage extends Component {
             canConfirm
             onConfirm={this.bookEventHandler}
             onCancel={this.onCancelHandler}
-            confirmText="Book!">
+            confirmText={this.context.token ? 'Book!' : 'Confirm'}>
               <h1>{this.state.selectedEvent.title}</h1>
               <h3>price: ${this.state.selectedEvent.price} - date: {new Date(this.state.selectedEvent.date).toLocaleDateString()}</h3>
               <p>{this.state.selectedEvent.description}</p>
