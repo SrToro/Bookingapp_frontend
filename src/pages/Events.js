@@ -199,7 +199,7 @@ class EventsPage extends Component {
         this.setState({ isLoading: false });
       });
   };
-
+//editing show detal to find the event by id and set it to the state
   showDetailHandler = eventId => {
     this.setState(prevState => {
       const selectedEvent = prevState.events.find(e => e._id === eventId)
