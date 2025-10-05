@@ -13,11 +13,12 @@ class BookingsPage extends Component {
 
     static contextType = AuthContext;
 
-    
+    //called when the component is rendered the first time
     componentDidMount() {
         this.fetchBookings();
     }
 
+    // to fetch the events from the backend
     fetchBookings = () => {
 
         this.setState({ isLoading: true });
