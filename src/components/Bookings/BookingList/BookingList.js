@@ -2,16 +2,21 @@ import React from "react";
 
 const bookingList = props => (
 
-    <ul>
+    <ul className="bookings_list">
         {props.bookingList.map(booking => {
-            return 
-                <li>{
-                    <div>
+            return (
+                <li className="Bookings_item">
+                    <div className="bookings_item-data">
                         {booking.event.title} - 
                         {new Date(booking.createdAt).toLocaleDateString()}
                     </div>
-                }</li>
+                    <div className="booking_item-actions">
+                        <button className="btn">Cancel</button>
+                    </div>
+                </li>
+            )
         })}
+
     </ul>
 )
 
