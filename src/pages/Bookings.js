@@ -65,12 +65,57 @@ class BookingsPage extends Component {
               this.setState({ isLoading: false });
             });
     }
+
+    deleteBookingHandler = bookingId =>{
+      this.setState({ isLoading: true });
+
+        const requestBody = {
+            query: `mutation{
+                    cancelBooking(bookingId :"${bookingId}){ 
+                        _id 
+                        createdAt
+                        event{
+                            _id
+                            title
+                            date
+                            
+                        }
+                    }
+                }`,
+        };
+      
+          const token = this.context.token;
+      
+          //to send http request to the backend and as a second argument the json with the post
+          fetch("http://localhost:8000/graphql", {
+            method: "POST",
+            body: JSON.stringify(requestBody),
+            headers: {
+              "Content-Type": "application/json",
+              'Authorization': 'Bearer ' + this.context.token
+            },
+          })
+            .then((res) => {
+              if (res.status !== 200 && res.status !== 201) {
+                throw new Error("failed");
+              }
+              return res.json();
+            })
+            .then((resData) => {
+              const bookings = resData.data.bookings;
+              this.setState({ bookings: bookings, isLoading: false });
+            })
+            .catch((err) => {
+              console.log(err);
+              this.setState({ isLoading: false });
+            });
+    }
     
     render() {
         return (
           <React.Fragment>
             {this.state.isLoading ? <Spinner /> : (
-              <bookingList bookings= {this.state.bookings}/>
+              <bookingList bookings= {this.state.bookings} onDelete={this.deleteBookingHandler} />
             )}
           </React.Fragment>       
         )
