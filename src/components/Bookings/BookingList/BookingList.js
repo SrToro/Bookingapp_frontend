@@ -7,7 +7,7 @@ const bookingList = props => (
     <ul className="bookings_list">
         {props.bookingList.map(booking => {
             return (
-                <li className="Bookings_item">
+                <li key={booking._id} className="bookings_item">
                     <div className="bookings_item-data">
                         {booking.event.title} - 
                         {new Date(booking.createdAt).toLocaleDateString()}

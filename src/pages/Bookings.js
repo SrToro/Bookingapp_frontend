@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import AuthContext from "../context/auth-context";
 
 import Spinner from '../components/Spinner/Spinner'
-import bookingList from "../components/Bookings/BookingList/BookingList";
+import bookingList from "../components/Bookings/BookingList/BookingList.js";
 
 
 class BookingsPage extends Component {
@@ -71,17 +71,11 @@ class BookingsPage extends Component {
 
         const requestBody = {
             query: `mutation{
-                    cancelBooking(bookingId :"${bookingId}){ 
+                      cancelBooking(bookingId :"${bookingId}"){ 
                         _id 
-                        createdAt
-                        event{
-                            _id
-                            title
-                            date
-                            
-                        }
-                    }
-                }`,
+                        title
+                      }
+                    }`,
         };
       
           const token = this.context.token;
@@ -102,8 +96,13 @@ class BookingsPage extends Component {
               return res.json();
             })
             .then((resData) => {
-              const bookings = resData.data.bookings;
-              this.setState({ bookings: bookings, isLoading: false });
+              
+              this.setState(prevState =>{
+                const updatedBookings = prevState.bookings.filter(booking =>{
+                  return booking._id !== bookingId
+                })
+                return{bookings: updatedBookings, isLoading: false}
+              });
             })
             .catch((err) => {
               console.log(err);
@@ -115,7 +114,7 @@ class BookingsPage extends Component {
         return (
           <React.Fragment>
             {this.state.isLoading ? <Spinner /> : (
-              <bookingList bookings= {this.state.bookings} onDelete={this.deleteBookingHandler} />
+              <bookingList bookings={this.state.bookings} onDelete={this.deleteBookingHandler} />
             )}
           </React.Fragment>       
         )
