@@ -1,17 +1,24 @@
 import React from "react";
 
+import './BookingList.css'
+
 const bookingList = props => (
 
-    <ul>
+    <ul className="bookings_list">
         {props.bookingList.map(booking => {
-            return 
-                <li>{
-                    <div>
+            return (
+                <li key={booking._id} className="bookings_item">
+                    <div className="bookings_item-data">
                         {booking.event.title} - 
                         {new Date(booking.createdAt).toLocaleDateString()}
                     </div>
-                }</li>
+                    <div className="booking_item-actions">
+                        <button className="btn" onClick={props.onDelete.bind(this, booking._id)}>Cancel</button>
+                    </div>
+                </li>
+            )
         })}
+
     </ul>
 )
 

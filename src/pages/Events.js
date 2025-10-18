@@ -211,7 +211,6 @@ class EventsPage extends Component {
     })
   }
 
-  //component that unmount the active component
   componentWillUnmount() {
     this.isActive = false;
   }

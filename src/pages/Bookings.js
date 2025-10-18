@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AuthContext from "../context/auth-context";
 
 import Spinner from '../components/Spinner/Spinner'
+import bookingList from "../components/Bookings/BookingList/BookingList.js";
 
 
 class BookingsPage extends Component {
@@ -64,20 +65,56 @@ class BookingsPage extends Component {
               this.setState({ isLoading: false });
             });
     }
+
+    deleteBookingHandler = bookingId =>{
+      this.setState({ isLoading: true });
+
+        const requestBody = {
+            query: `mutation{
+                      cancelBooking(bookingId :"${bookingId}"){ 
+                        _id 
+                        title
+                      }
+                    }`,
+        };
+      
+          const token = this.context.token;
+      
+          //to send http request to the backend and as a second argument the json with the post
+          fetch("http://localhost:8000/graphql", {
+            method: "POST",
+            body: JSON.stringify(requestBody),
+            headers: {
+              "Content-Type": "application/json",
+              'Authorization': 'Bearer ' + this.context.token
+            },
+          })
+            .then((res) => {
+              if (res.status !== 200 && res.status !== 201) {
+                throw new Error("failed");
+              }
+              return res.json();
+            })
+            .then((resData) => {
+              
+              this.setState(prevState =>{
+                const updatedBookings = prevState.bookings.filter(booking =>{
+                  return booking._id !== bookingId
+                })
+                return{bookings: updatedBookings, isLoading: false}
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+              this.setState({ isLoading: false });
+            });
+    }
     
     render() {
         return (
           <React.Fragment>
             {this.state.isLoading ? <Spinner /> : (
-              <ul>
-                  {this.state.bookings.map(booking => 
-                      <li>
-                          {booking.event.title} - 
-                          {new Date(booking.createdAt).toLocaleDateString()}
-                      </li>
-                  )}
-              </ul> 
-
+              <bookingList bookings={this.state.bookings} onDelete={this.deleteBookingHandler} />
             )}
           </React.Fragment>       
         )
