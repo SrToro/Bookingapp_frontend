@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import AuthContext from "../context/auth-context";
 
 import Spinner from '../components/Spinner/Spinner'
-import bookingList from "../components/Bookings/BookingList/BookingList.js";
+import BookingList from "../components/Bookings/BookingList/BookingList.js";
 
 
 class BookingsPage extends Component {
@@ -114,7 +114,7 @@ class BookingsPage extends Component {
         return (
           <React.Fragment>
             {this.state.isLoading ? <Spinner /> : (
-              <bookingList bookings={this.state.bookings} onDelete={this.deleteBookingHandler} />
+              <BookingList bookings={this.state.bookings} onDelete={this.deleteBookingHandler} />
             )}
           </React.Fragment>       
         )
