@@ -32,6 +32,7 @@ class EventsPage extends Component {
     this.fetchEventsHandler();
   }
 
+  //event that set me the creating state on true
   startCreateEventHandler = () => {
     this.setState({ creating: true });
   };
@@ -109,10 +110,12 @@ class EventsPage extends Component {
       });
   };
 
+  // set a event selected to null 
   onCancelHandler = () => {
     this.setState({ creating:false, selectedEvent:null });
   };
 
+  //request a book when a event are selected 
   bookEventHandler =() =>{
     if (!this.context.token){
       this.setState({selectedEvent:null})
@@ -154,6 +157,7 @@ class EventsPage extends Component {
       });
   }
 
+  //fuction that request a event 
   fetchEventsHandler = () => {
     this.setState({ isLoading: true });
     const requestBody = {
@@ -207,6 +211,7 @@ class EventsPage extends Component {
     })
   }
 
+  //component that unmount the active component
   componentWillUnmount() {
     this.isActive = false;
   }
