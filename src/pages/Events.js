@@ -175,6 +175,7 @@ class EventsPage extends Component {
         }`,
     };
 
+
     const token = this.context.token;
 
     //to send http request to the backend and as a second argument the json with the post
@@ -183,7 +184,7 @@ class EventsPage extends Component {
       body: JSON.stringify(requestBody),
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + this.context.token,
+        Authorization: "Bearer " + this.context.token
       },
     })
       .then((res) => {
@@ -196,11 +197,13 @@ class EventsPage extends Component {
         const events = resData.data.events;
         if(this.isActive){
           this.setState({ events: events, isLoading: false });
+          console.log("is showing events")
         }
       })
       .catch((err) => {
         console.log(err);
         this.setState({ isLoading: false });
+        console.log("is active")
       });
   };
 //editing show detal to find the event by id and set it to the state
