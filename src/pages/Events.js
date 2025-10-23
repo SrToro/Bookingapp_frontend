@@ -75,7 +75,7 @@ class EventsPage extends Component {
     const token = this.context.token;
 
     //to send http request to the backend and as a second argument the json with the post
-    fetch("http://localhost:8000/graphql", {
+    fetch("http://localhost:8001/graphql", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
@@ -134,7 +134,7 @@ class EventsPage extends Component {
     const token = this.context.token;
 
     //to send http request to the backend and as a second argument the json with the post
-    fetch("http://localhost:8000/graphql", {
+    fetch("http://localhost:8001/graphql", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
@@ -157,19 +157,20 @@ class EventsPage extends Component {
       });
   }
 
+
   //fuction that request a event 
   fetchEventsHandler = () => {
     this.setState({ isLoading: true });
     const requestBody = {
       query: `query{
-            events{ _id 
-                title
-                description
-                price
-                date
-              creator{
-                _id
-                email
+                events{ _id 
+                  title
+                  description
+                  price
+                  date
+                  creator{
+                    _id
+                    email
               }
             }
         }`,
@@ -179,7 +180,7 @@ class EventsPage extends Component {
     const token = this.context.token;
 
     //to send http request to the backend and as a second argument the json with the post
-    fetch("http://localhost:8000/graphql", {
+    fetch("http://localhost:8001/graphql", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
@@ -195,7 +196,8 @@ class EventsPage extends Component {
       })
       .then((resData) => {
         const events = resData.data.events;
-        if(this.isActive){
+        
+        if(this.isActive){//AQUI ESTA EL PROBLEMA es que la condicion era en false, me faltaba el !
           this.setState({ events: events, isLoading: false });
           console.log("is showing events")
         }
@@ -244,7 +246,7 @@ class EventsPage extends Component {
                   rows={4}
                   ref={this.descriptionElRef}
                 ></textarea>
-              </div>
+              </div> 
               <div className="form-control">
                 <label htmlFor="price">Price</label>
                 <input type="number" id="price" ref={this.priceElRef}></input>

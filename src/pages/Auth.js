@@ -69,7 +69,7 @@ class AuthPage extends Component {
 
 
         //to send http request to the backend and as a second argument the json with the post
-        fetch('http://localhost:8000/graphql', {
+        fetch('http://localhost:8001/graphql', {
             method: 'POST',
             body: JSON.stringify(requestBody),
             headers: {
