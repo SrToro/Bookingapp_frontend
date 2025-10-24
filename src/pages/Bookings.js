@@ -42,7 +42,7 @@ class BookingsPage extends Component {
           const token = this.context.token;
       
           //to send http request to the backend and as a second argument the json with the post
-          fetch("http://localhost:8001/graphql", {
+          fetch("http://localhost:8000/graphql", {
             method: "POST",
             body: JSON.stringify(requestBody),
             headers: {
@@ -59,6 +59,7 @@ class BookingsPage extends Component {
             .then((resData) => {
               const bookings = resData.data.bookings;
               this.setState({ bookings: bookings, isLoading: false });
+              console.log(resData); // me esta TRAYENDO UN ARRAY VACIO
             })
             .catch((err) => {
               console.log(err);
@@ -81,7 +82,7 @@ class BookingsPage extends Component {
           const token = this.context.token;
       
           //to send http request to the backend and as a second argument the json with the post
-          fetch("http://localhost:8001/graphql", {
+          fetch("http://localhost:8000/graphql", {
             method: "POST",
             body: JSON.stringify(requestBody),
             headers: {

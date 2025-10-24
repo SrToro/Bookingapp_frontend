@@ -75,7 +75,7 @@ class EventsPage extends Component {
     const token = this.context.token;
 
     //to send http request to the backend and as a second argument the json with the post
-    fetch("http://localhost:8001/graphql", {
+    fetch("http://localhost:8000/graphql", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
@@ -134,7 +134,7 @@ class EventsPage extends Component {
     const token = this.context.token;
 
     //to send http request to the backend and as a second argument the json with the post
-    fetch("http://localhost:8001/graphql", {
+    fetch("http://localhost:8000/graphql", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
@@ -180,7 +180,7 @@ class EventsPage extends Component {
     const token = this.context.token;
 
     //to send http request to the backend and as a second argument the json with the post
-    fetch("http://localhost:8001/graphql", {
+    fetch("http://localhost:8000/graphql", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
@@ -197,7 +197,7 @@ class EventsPage extends Component {
       .then((resData) => {
         const events = resData.data.events;
         
-        if(this.isActive){//AQUI ESTA EL PROBLEMA es que la condicion era en false, me faltaba el !
+        if(!this.isActive){//AQUI ESTA EL PROBLEMA es negativo?
           this.setState({ events: events, isLoading: false });
           console.log("is showing events")
         }
