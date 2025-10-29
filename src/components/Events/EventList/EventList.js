@@ -1,13 +1,13 @@
 import React from "react";
 
 
-import "./EventList.css";
 import EventItem from "../EventList/EventItem/EventItem.js";
+import "./EventList.css";
 
 const eventList = props => {
 
     const events = props.events.map(event => {
-        return <EventItem 
+        return (<EventItem 
           key={event._id} 
           eventId={event._id} 
           title={event.title} 
@@ -16,7 +16,7 @@ const eventList = props => {
           userId={props.authUserId} 
           creatorId={event.creator._id}
           onDetail={props.onViewDetail}
-        />
+        />)
       });
 
     return (<ul className="event_list">{events}</ul>)
