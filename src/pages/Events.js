@@ -30,7 +30,7 @@ class EventsPage extends Component {
   componentDidMount() {
     this.fetchEventsHandler();
   }
-  //hola
+  
   //event that set me the creating state on true
   startCreateEventHandler = () => {
     this.setState({ creating: true });
