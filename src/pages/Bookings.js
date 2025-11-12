@@ -26,13 +26,13 @@ class BookingsPage extends Component {
 
         const requestBody = {
             query: `query{
-                    bookings{ 
-                        _id 
-                        createdAt
-                        event{
-                            _id
-                            title
-                            date
+                    bookings{  
+                        _id  
+                        createdAt 
+                        event{ 
+                            _id 
+                            title 
+                            date 
                             
                         }
                     }
@@ -54,21 +54,21 @@ class BookingsPage extends Component {
               if (res.status !== 200 && res.status !== 201) {
                 throw new Error("failed");
               }
-              return res.json();
+              return res.json(); 
             })
-            .then((resData) => {
-              const bookings = resData.data.bookings;
-              this.setState({ bookings: bookings, isLoading: false });
-            })
-            .catch((err) => {
-              console.log(err);
-              this.setState({ isLoading: false });
-            });
+            .then((resData) => { 
+              const bookings = resData.data.bookings; 
+              this.setState({ bookings: bookings, isLoading: false }); 
+            }) 
+            .catch((err) => { 
+              console.log(err); 
+              this.setState({ isLoading: false }); 
+            }); 
     }
 
     deleteBookingHandler = bookingId =>{
       this.setState({ isLoading: true });
-
+ 
         const requestBody = {
             query: `mutation{
                       cancelBooking(bookingId :"${bookingId}"){ 
@@ -94,20 +94,21 @@ class BookingsPage extends Component {
                 throw new Error("failed");
               }
               return res.json();
-            })
-            .then((resData) => {
+            }) 
+            .then((resData) => { 
               
-              this.setState(prevState =>{
-                const updatedBookings = prevState.bookings.filter(booking =>{
-                  return booking._id !== bookingId
-                })
-                return{bookings: updatedBookings, isLoading: false}
-              });
-            })
-            .catch((err) => {
-              console.log(err);
-              this.setState({ isLoading: false });
-            });
+              this.setState(prevState =>{ 
+                const updatedBookings = prevState.bookings.filter(booking =>{ 
+                  return booking._id !== bookingId 
+                }) 
+                return{bookings: updatedBookings, isLoading: false} 
+              }); 
+            }) 
+
+            .catch((err) => { 
+              console.log(err); 
+              this.setState({ isLoading: false }); 
+            }); 
     }
     
     render() {
