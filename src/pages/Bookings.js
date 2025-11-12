@@ -56,14 +56,15 @@ class BookingsPage extends Component {
               }
               return res.json(); 
             })
-            .then((resData) => { 
-              const bookings = resData.data.bookings; 
-              this.setState({ bookings: bookings, isLoading: false }); 
-            }) 
-            .catch((err) => { 
-              console.log(err); 
-              this.setState({ isLoading: false }); 
-            }); 
+            .then((resData) => {
+              const bookings = resData.data.bookings;
+              this.setState({ bookings: bookings, isLoading: false });
+              console.log(resData); // me esta TRAYENDO UN ARRAY VACIO
+            })
+            .catch((err) => {
+              console.log(err);
+              this.setState({ isLoading: false });
+            });
     }
 
     deleteBookingHandler = bookingId =>{
@@ -82,12 +83,12 @@ class BookingsPage extends Component {
       
           //to send http request to the backend and as a second argument the json with the post
           fetch("http://localhost:8000/graphql", {
-            method: "POST",
-            body: JSON.stringify(requestBody),
-            headers: {
-              "Content-Type": "application/json",
-              'Authorization': 'Bearer ' + this.context.token
-            },
+            method: "POST", 
+            body: JSON.stringify(requestBody), 
+            headers: {  
+              "Content-Type": "application/json",  
+              'Authorization': 'Bearer ' + this.context.token 
+            }, 
           })
             .then((res) => {
               if (res.status !== 200 && res.status !== 201) {

@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 
 import Modal from "../components/Modal/Modal";
 import Backdrop from "../components/Backdrop/Backdrop";
@@ -16,8 +16,7 @@ class EventsPage extends Component {
     selectedEvent: null,
   };
 
-   isActive = true; 
-
+  isActive = true; 
   static contextType = AuthContext;
 
   constructor(props) {
@@ -31,7 +30,7 @@ class EventsPage extends Component {
   componentDidMount() {
     this.fetchEventsHandler();
   }
-
+  
   //event that set me the creating state on true
   startCreateEventHandler = () => {
     this.setState({ creating: true });
@@ -120,62 +119,64 @@ class EventsPage extends Component {
     if (!this.context.token){
       this.setState({selectedEvent:null})
       return
-    }
-    const requestBody = {
-      query: `mutation{
-            bookEvent(eventId: "${this.state.selectedEvent._id}")
-              { _id 
-                createdAt
-                updatedAt
-              }
-          }`,
-    };
+      }
+      const requestBody = {
+        query: `mutation{
+              bookEvent(eventId: "${this.state.selectedEvent._id}")
+                { _id 
+                  createdAt
+                  updatedAt
+                }
+            }`,
+      };
 
-    const token = this.context.token;
+      const token = this.context.token;
 
-    //to send http request to the backend and as a second argument the json with the post
-    fetch("http://localhost:8000/graphql", {
-      method: "POST",
-      body: JSON.stringify(requestBody),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + this.context.token,
-      },
-    })
-      .then((res) => {
-        if (res.status !== 200 && res.status !== 201) {
-          throw new Error("failed");
-        }
-        return res.json();
+      //to send http request to the backend and as a second argument the json with the post
+      fetch("http://localhost:8000/graphql", {
+        method: "POST",
+        body: JSON.stringify(requestBody),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + this.context.token,
+        },
       })
-      .then((resData) => {
-        console.log(resData);
-        this.setState({selectedEvent:null})
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => {
+          if (res.status !== 200 && res.status !== 201) {
+            throw new Error("failed");
+          }
+          return res.json();
+        })
+        .then((resData) => {
+          console.log(resData);
+          this.setState({selectedEvent:null})
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   }
+
 
   //fuction that request a event 
   fetchEventsHandler = () => {
     this.setState({ isLoading: true });
     const requestBody = {
       query: `query{
-            events{ _id 
-                title
-                description
-                price
-                date
-              creator{
-                _id
-                email
+                events{ _id 
+                  title
+                  description
+                  price
+                  date
+                  creator{
+                    _id
+                    email
               }
             }
         }`,
     };
 
-    const token = this.context.token;
+    console.log(this.isActive);
+    // const token = this.context.token;
 
     //to send http request to the backend and as a second argument the json with the post
     fetch("http://localhost:8000/graphql", {
@@ -183,24 +184,27 @@ class EventsPage extends Component {
       body: JSON.stringify(requestBody),
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + this.context.token,
+        // Authorization: "Bearer " + this.context.token
       },
     })
-      .then((res) => {
+      .then(res => {
         if (res.status !== 200 && res.status !== 201) {
           throw new Error("failed");
         }
         return res.json();
       })
-      .then((resData) => {
+      .then(resData => {
         const events = resData.data.events;
-        if(this.isActive){
+        
+        if(!this.isActive){
           this.setState({ events: events, isLoading: false });
+          console.log("is showing events")
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(err => {
+        
         this.setState({ isLoading: false });
+        console.log("is active")
       });
   };
 //editing show detal to find the event by id and set it to the state
@@ -241,7 +245,7 @@ class EventsPage extends Component {
                   rows={4}
                   ref={this.descriptionElRef}
                 ></textarea>
-              </div>
+              </div> 
               <div className="form-control">
                 <label htmlFor="price">Price</label>
                 <input type="number" id="price" ref={this.priceElRef}></input>
