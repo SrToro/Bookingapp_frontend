@@ -5,15 +5,15 @@ import Spinner from '../components/Spinner/Spinner'
 import BookingList from "../components/Bookings/BookingList/BookingList.js";
 
 
-class BookingsPage extends Component {
+ class BookingsPage extends Component {
 
     state = {
-        isLoading: false,   
-        bookings: []
-    }
+        isLoading: false,    
+        bookings: [] 
+    }  
 
-    static contextType = AuthContext;
-
+    static contextType = AuthContext; 
+ 
     //called when the component is rendered the first time
     componentDidMount() {
         this.fetchBookings();
