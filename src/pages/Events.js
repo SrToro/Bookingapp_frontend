@@ -57,18 +57,24 @@ class EventsPage extends Component {
     //make a request body on a let with the values from the form that created as a cons but if the state isLogin is true
 
     const requestBody = {
-      query: `mutation{
+      query: `mutation CreateEventQuery($titleCEQ: String!, $descriptionCEQ: String!, $priceCEQ: Float!, $dateCEQ: String!){
                         createEvent(eventInput: {
-                            title: "${title}", 
-                            description: "${description}", 
-                            price: ${price}, 
-                            date: "${date}"
+                            title: $titleCEQ, 
+                            description: $descriptionCEQ, 
+                            price: $priceCEQ, 
+                            date: $dateCEQ"
                         }){ _id 
                             title
                             description
                             price
                             date}
                     }`,
+      variables:{
+        $titleCEQ: title,
+        $descriptionCEQ: description,
+        $priceCEQ: price,
+        $dateCEQ: date
+      }
     };
 
     const token = this.context.token;
