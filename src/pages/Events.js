@@ -127,13 +127,16 @@ class EventsPage extends Component {
       return
       }
       const requestBody = {
-        query: `mutation{
-              bookEvent(eventId: "${this.state.selectedEvent._id}")
+        query: `mutation BookEventHnd($idEvent: ID!){
+              bookEvent(eventId: $idEvent)
                 { _id 
                   createdAt
                   updatedAt
                 }
             }`,
+        variables:{
+          idEvent: this.state.selectedEvent._id
+        }
       };
 
       const token = this.context.token;
