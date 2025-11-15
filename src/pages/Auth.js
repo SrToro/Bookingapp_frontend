@@ -43,26 +43,34 @@ class AuthPage extends Component {
         //make a request body on a let with the values from the form that created as a cons but if the state isLogin is true
         let requestBody = {
             query:
-                `query{
-                login(email: "${email}", password: "${password}"){
+                `query Login($emailLogin: String!, $passwordLogin: String!){
+                login(email: $emailLogin, password: $passwordLogin){
                     userId
                     token
                     tokenExpiration
                     }
-                }`
+                }`,
+            variables:{
+                emailLogin: email,
+                passwordLogin: password
+            }
         };
 
         //if the login state is false, make a create user
         if (!this.state.isLogin) {
 
             requestBody = {
-                query: `mutation{
+                query: `mutation CreateUserQuery($emailCreateUser: String!, $passwordCreateUser: String!){
                             createUser(userInput: {
-                                email: "${email}", 
-                                password: "${password}"
+                                email: $emailCreateUser, 
+                                password: $passwordCreateUser
                             }){ _id 
                                 email}
-                        }`
+                        }`,
+                variables: {
+                    emailCreateUser: email,
+                    passwordCreateUser: password
+                }
             };
 
         }

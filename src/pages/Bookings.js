@@ -71,12 +71,15 @@ import BookingList from "../components/Bookings/BookingList/BookingList.js";
       this.setState({ isLoading: true });
 
         const requestBody = {
-            query: `mutation{
-                      cancelBooking(bookingId :"${bookingId}"){ 
+            query: `mutation CancelBooking($id: ID!) {
+                      cancelBooking(bookingId: $id){ 
                         _id 
                         title
                       }
                     }`,
+                    variables: {
+                      id: bookingId
+                    }
         };
       
           const token = this.context.token;
@@ -115,7 +118,10 @@ import BookingList from "../components/Bookings/BookingList/BookingList.js";
         return (
           <React.Fragment>
             {this.state.isLoading ? <Spinner /> : (
-              <BookingList bookings={this.state.bookings} onDelete={this.deleteBookingHandler} />
+              <BookingList 
+              bookings={this.state.bookings} 
+              onDelete={this.deleteBookingHandler} 
+              />
             )}
           </React.Fragment>       
         )
