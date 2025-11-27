@@ -282,24 +282,24 @@ class EventsPage extends Component {
           </div> )
         }
 
-        {this.context.token && (
-          <div className="events-control">
-            <p>Share your own Events!</p>
-            <button className="btn" onClick={this.startCreateEventHandler}>
-              Create Event
-            </button>
-          </div>
-        )}
-        {this.state.isLoading ? <Spinner/>: <EventList 
-          events={this.state.events} 
-          authUserId={this.context.userId}
-          onViewDetail={this.showDetailHandler}
-        />
-        }
+        {this.context.token && ( 
+          <div className="events-control"> 
+            <p>Share your own Events!</p> 
+            <button className="btn" onClick={this.startCreateEventHandler}> 
+              Create Event 
+            </button> 
+          </div> 
+        )} 
+        {this.state.isLoading ? <Spinner/>: <EventList  
+          events={this.state.events}  
+          authUserId={this.context.userId} 
+          onViewDetail={this.showDetailHandler} 
+        /> 
+        } 
               
-      </React.Fragment>
-    );
-  }
-}
+      </React.Fragment> 
+    ); 
+  } 
+} 
 
 export default EventsPage;
