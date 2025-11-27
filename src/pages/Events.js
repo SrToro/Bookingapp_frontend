@@ -208,10 +208,10 @@ class EventsPage extends Component {
         if(!this.isActive){
           this.setState({ events: events, isLoading: false });
           console.log("is showing events")
-        }
-      })
-      .catch(err => {
-        
+        } 
+      }) 
+      .catch(err => { 
+         
         this.setState({ isLoading: false });
         console.log("is active")
       });
