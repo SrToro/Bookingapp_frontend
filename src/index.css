@@ -19,25 +19,26 @@ body {
 .form-control {
     margin-bottom: 1rem;
 }
+ 
+.form-actions button, 
+.btn { 
+    background: rgb(162, 232, 245); 
+    font: inherit; 
+    margin-bottom: 1rem; 
+    border: 1px solid rgb(0, 91, 148); 
+    border-radius: 3px; 
+    padding: 0.25rem 1rem; 
+    margin-right: 1rem; 
+    box-shadow: 1px 1px 5px rgb(0, 91, 148); 
+    cursor: pointer; 
+} 
 
-.form-actions button,
-.btn {
-    background: rgb(162, 232, 245);
-    font: inherit;
-    margin-bottom: 1rem;
-    border: 1px solid rgb(0, 91, 148);
-    border-radius: 3px;
-    padding: 0.25rem 1rem;
-    margin-right: 1rem;
-    box-shadow: 1px 1px 5px rgb(0, 91, 148);
-    cursor: pointer;
-}
-
-.form-actions button:hover ,
-.form-actions button:active,
-.btn:hover,
-.btn:active {
-    background: rgb(139, 236, 212);
-    border-color: rgb(73, 126, 113);
-    
-}
+.form-actions button:hover , 
+.form-actions button:active, 
+.btn:hover, 
+.btn:active { 
+    background: rgb(139, 236, 212); 
+    border-color: rgb(73, 126, 113); 
+     
+} 
+ 
