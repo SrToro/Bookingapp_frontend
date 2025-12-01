@@ -78,10 +78,10 @@ import BookingList from "../components/Bookings/BookingList/BookingList.js";
                       }
                     }`,
                     variables: {
-                      id: bookingId
-                    }
-        };
-      
+                      id: bookingId 
+                    } 
+        }; 
+       
           const token = this.context.token;
       
           //to send http request to the backend and as a second argument the json with the post
