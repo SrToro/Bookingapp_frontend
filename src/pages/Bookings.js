@@ -116,16 +116,22 @@ import BookingList from "../components/Bookings/BookingList/BookingList.js";
     }
     
     render() {
-        return (
+      let content = <Spinner> </Spinner >;
+      if(!this.state.isLoading){
+        content = (
           <React.Fragment>
-            {this.state.isLoading ? <Spinner /> : (
-              <BookingList 
-              bookings={this.state.bookings} 
-              onDelete={this.deleteBookingHandler} 
-              />
-            )}
-          </React.Fragment>       
+            <div>
+              <button>List</button>
+              <button>Chart</button>
+            </div>
+          </React.Fragment>
         )
+      }
+      return (
+        <React.Fragment>
+          {content}
+        </React.Fragment>       
+      )
     }
 }
 
