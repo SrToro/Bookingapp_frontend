@@ -115,24 +115,24 @@ import BookingList from "../components/Bookings/BookingList/BookingList.js";
             }); 
     }
     
-    render() {
-      let content = <Spinner> </Spinner >;
-      if(!this.state.isLoading){
-        content = (
-          <React.Fragment>
-            <div>
-              <button>List</button>
-              <button>Chart</button>
-            </div>
-          </React.Fragment>
-        )
-      }
-      return (
-        <React.Fragment>
-          {content}
-        </React.Fragment>       
-      )
-    }
-}
-
-export default BookingsPage;
+    render() { 
+      let content = <Spinner> </Spinner >; 
+      if(!this.state.isLoading){ 
+        content = ( 
+          <React.Fragment> 
+            <div> 
+              <button>List</button> 
+              <button>Chart</button> 
+            </div> 
+          </React.Fragment> 
+        ) 
+      }  
+      return ( 
+        <React.Fragment> 
+          {content} 
+        </React.Fragment>
+      ) 
+    } 
+} 
+ 
+export default BookingsPage; 
