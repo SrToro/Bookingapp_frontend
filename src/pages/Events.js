@@ -59,23 +59,23 @@ class EventsPage extends Component {
     const requestBody = {
       query: `mutation CreateEventQuery($titleCEQ: String!, $descriptionCEQ: String!, $priceCEQ: Float!, $dateCEQ: String!){
                         createEvent(eventInput: {
-                            title: $titleCEQ, 
-                            description: $descriptionCEQ, 
-                            price: $priceCEQ, 
-                            date: $dateCEQ"
-                        }){ _id 
-                            title
-                            description
-                            price
-                            date}
-                    }`,
-      variables:{
-        $titleCEQ: title,
-        $descriptionCEQ: description,
-        $priceCEQ: price,
-        $dateCEQ: date
-      }
-    };
+                            title: $titleCEQ,
+                            description: $descriptionCEQ,
+                            price: $priceCEQ,  
+                            date: $dateCEQ" 
+                        }){ _id  
+                            title 
+                            description 
+                            price 
+                            date} 
+                    }`, 
+      variables:{ 
+        $titleCEQ: title, 
+        $descriptionCEQ: description, 
+        $priceCEQ: price, 
+        $dateCEQ: date 
+      } 
+    }; 
 
     const token = this.context.token;
 
