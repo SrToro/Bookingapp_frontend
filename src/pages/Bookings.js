@@ -63,8 +63,8 @@ import BookingList from "../components/Bookings/BookingList/BookingList.js";
             })
             .catch((err) => {
               console.log(err);
-              this.setState({ isLoading: false });
-            });
+              this.setState({ isLoading: false }); 
+            }); 
     }
 
     deleteBookingHandler = bookingId =>{
