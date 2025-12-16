@@ -56,31 +56,31 @@ import BookingList from "../components/Bookings/BookingList/BookingList.js";
               }
               return res.json(); 
             })
-            .then((resData) => {
-              const bookings = resData.data.bookings;
-              this.setState({ bookings: bookings, isLoading: false });
-              console.log(resData); // me esta TRAYENDO UN ARRAY VACIO
-            })
-            .catch((err) => {
-              console.log(err);
-              this.setState({ isLoading: false }); 
-            }); 
-    }
+            .then((resData) => { 
+              const bookings = resData.data.bookings; 
+              this.setState({ bookings: bookings, isLoading: false }); 
+              console.log(resData); // me esta TRAYENDO UN ARRAY VACIO 
+            }) 
+            .catch((err) => {  
+              console.log(err); 
+              this.setState({ isLoading: false });  
+            });  
+    } 
 
-    deleteBookingHandler = bookingId =>{
-      this.setState({ isLoading: true });
- 
-        const requestBody = {
-            query: `mutation CancelBooking($id: ID!) {
-                      cancelBooking(bookingId: $id){ 
-                        _id 
-                        title
-                      }
-                    }`,
-                    variables: {
-                      id: bookingId 
-                    } 
-        }; 
+    deleteBookingHandler = bookingId =>{ 
+      this.setState({ isLoading: true }); 
+  
+        const requestBody = { 
+            query: `mutation CancelBooking($id: ID!) { 
+                      cancelBooking(bookingId: $id){  
+                        _id  
+                        title  
+                      } 
+                    }`, 
+                    variables: { 
+                      id: bookingId  
+                    }  
+        };  
        
           const token = this.context.token;
       
