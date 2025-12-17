@@ -16,7 +16,7 @@ class EventsPage extends Component {
     selectedEvent: null,
   };
 
-  isActive = true; 
+  isActive = true;
   static contextType = AuthContext;
 
   constructor(props) {
@@ -61,21 +61,21 @@ class EventsPage extends Component {
                         createEvent(eventInput: {
                             title: $titleCEQ,
                             description: $descriptionCEQ,
-                            price: $priceCEQ,  
-                            date: $dateCEQ" 
-                        }){ _id  
-                            title 
-                            description 
-                            price 
+                            price: $priceCEQ,
+                            date: $dateCEQ"
+                        }){ _id
+                            title
+                            description
+                            price
                             date} 
-                    }`, 
-      variables:{ 
-        $titleCEQ: title, 
-        $descriptionCEQ: description, 
-        $priceCEQ: price, 
-        $dateCEQ: date 
-      } 
-    }; 
+                    }`,
+      variables:{
+        $titleCEQ: title,
+        $descriptionCEQ: description,
+        $priceCEQ: price,
+        $dateCEQ: date
+      }
+    };
 
     const token = this.context.token;
 
@@ -115,12 +115,12 @@ class EventsPage extends Component {
       });
   };
 
-  // set a event selected to null 
+  // set a event selected to null
   onCancelHandler = () => {
     this.setState({ creating:false, selectedEvent:null });
   };
 
-  //request a book when a event are selected 
+  //request a book when a event are selected
   bookEventHandler =() =>{
     if (!this.context.token){
       this.setState({selectedEvent:null})
@@ -129,7 +129,7 @@ class EventsPage extends Component {
       const requestBody = {
         query: `mutation BookEventHnd($idEvent: ID!){
               bookEvent(eventId: $idEvent)
-                { _id 
+                { _id
                   createdAt
                   updatedAt
                 }
@@ -166,12 +166,12 @@ class EventsPage extends Component {
   }
 
 
-  //fuction that request a event 
+  //fuction that request a event
   fetchEventsHandler = () => {
     this.setState({ isLoading: true });
     const requestBody = {
       query: `query{
-                events{ _id 
+                events{ _id
                   title
                   description
                   price
@@ -204,14 +204,14 @@ class EventsPage extends Component {
       })
       .then(resData => {
         const events = resData.data.events;
-        
+
         if(!this.isActive){
           this.setState({ events: events, isLoading: false });
           console.log("is showing events")
-        } 
-      }) 
-      .catch(err => { 
-         
+        }
+      })
+      .catch(err => {
+
         this.setState({ isLoading: false });
         console.log("is active")
       });
@@ -254,7 +254,7 @@ class EventsPage extends Component {
                   rows={4}
                   ref={this.descriptionElRef}
                 ></textarea>
-              </div> 
+              </div>
               <div className="form-control">
                 <label htmlFor="price">Price</label>
                 <input type="number" id="price" ref={this.priceElRef}></input>
@@ -282,24 +282,24 @@ class EventsPage extends Component {
           </div> )
         }
 
-        {this.context.token && ( 
-          <div className="events-control"> 
-            <p>Share your own Events!</p> 
-            <button className="btn" onClick={this.startCreateEventHandler}> 
-              Create Event 
-            </button> 
-          </div> 
-        )} 
-        {this.state.isLoading ? <Spinner/>: <EventList  
-          events={this.state.events}  
-          authUserId={this.context.userId} 
-          onViewDetail={this.showDetailHandler} 
-        /> 
-        } 
-              
-      </React.Fragment> 
-    ); 
-  } 
-} 
+        {this.context.token && (
+          <div className="events-control">
+            <p>Share your own Events!</p>
+            <button className="btn" onClick={this.startCreateEventHandler}>
+              Create Event
+            </button>
+          </div>
+        )}
+        {this.state.isLoading ? <Spinner/>: <EventList
+          events={this.state.events}
+          authUserId={this.context.userId}
+          onViewDetail={this.showDetailHandler}
+        />
+        }
+     
+      </React.Fragment>
+    );
+  }
+}
 
 export default EventsPage;
