@@ -57,13 +57,13 @@ import BookingList from "../components/Bookings/BookingList/BookingList.js";
               return res.json(); 
             })
             .then((resData) => { 
-              const bookings = resData.data.bookings; 
-              this.setState({ bookings: bookings, isLoading: false }); 
-              console.log(resData); // me esta TRAYENDO UN ARRAY VACIO 
-            }) 
+              const bookings = resData.data.bookings;  
+              this.setState({ bookings: bookings, isLoading: false });  
+              console.log(resData); // me esta TRAYENDO UN ARRAY VACIO  
+            })  
             .catch((err) => {  
-              console.log(err); 
-              this.setState({ isLoading: false });  
+              console.log(err);  
+              this.setState({ isLoading: false });   
             });  
     } 
 
@@ -82,18 +82,18 @@ import BookingList from "../components/Bookings/BookingList/BookingList.js";
                     }  
         };  
        
-          const token = this.context.token;
-      
-          //to send http request to the backend and as a second argument the json with the post
-          fetch("http://localhost:8000/graphql", {
-            method: "POST", 
-            body: JSON.stringify(requestBody), 
-            headers: {  
-              "Content-Type": "application/json",  
-              'Authorization': 'Bearer ' + this.context.token 
-            }, 
+          const token = this.context.token; 
+       
+          //to send http request to the backend and as a second argument the json with the post 
+          fetch("http://localhost:8000/graphql", { 
+            method: "POST",  
+            body: JSON.stringify(requestBody),  
+            headers: {   
+              "Content-Type": "application/json",   
+              'Authorization': 'Bearer ' + this.context.token  
+            },  
           })
-            .then((res) => {
+            .then((res) => {  
               if (res.status !== 200 && res.status !== 201) {
                 throw new Error("failed");
               }
@@ -109,10 +109,10 @@ import BookingList from "../components/Bookings/BookingList/BookingList.js";
               }); 
             }) 
 
-            .catch((err) => { 
-              console.log(err); 
-              this.setState({ isLoading: false }); 
-            }); 
+            .catch((err) => {  
+              console.log(err);  
+              this.setState({ isLoading: false });  
+            });   
     }
     
     render() { 
@@ -128,11 +128,11 @@ import BookingList from "../components/Bookings/BookingList/BookingList.js";
         ) 
       }  
       return ( 
-        <React.Fragment> 
-          {content} 
-        </React.Fragment>
-      ) 
-    } 
+        <React.Fragment>  
+          {content}  
+        </React.Fragment> 
+      )  
+    }  
 } 
  
 export default BookingsPage; 
